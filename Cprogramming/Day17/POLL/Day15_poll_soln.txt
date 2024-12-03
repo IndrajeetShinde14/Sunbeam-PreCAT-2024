@@ -1,0 +1,179 @@
+/*
+//What will be the output of the following code on 64 bit compliation
+#include<stdio.h>
+#include<stdlib.h>
+int main()
+{
+char *p=NULL; short int *q=NULL;
+p = (char *)malloc(sizeof(char)*20);
+q = (short int *)malloc(sizeof( short int)*20);
+printf("%d bytes\n", sizeof(p)); // 8 bytes
+
+
+    sizeof(p) is a size of a pointer i.e 4 / 8 bytes
+    on 64 bit compiler pointer size is 8 bytes
+
+free(p);
+p=NULL;
+return 0;
+}
+A. 4 bytes
+B. 2 bytes
+C. 8 bytes
+D. 20 bytes
+E. 40 bytes
+Answer: C
+
+*/
+// *************************************************************
+
+/*
+// I HAVE SHARED THE DAIGRAM OF FOLLOWING QUESTION
+// HERE IN QUESTION CORRECT ANSWER IS GIVEN WRONG
+// REFER MY DAIGRAM AND SOLVE
+
+
+#include<stdio.h>
+#include<string.h>
+#include<stdlib.h>
+int main()
+{
+char *ptr=NULL, s[]="Sun", d[]="Beam";
+ptr = (char *)calloc(1,30);
+strcat(ptr,d);
+strcat(ptr,s);
+printf("%d",ptr[strcmp("SunBeam",ptr)]);
+free(ptr);
+ptr=NULL;
+return 0;
+}
+
+A. nothing
+B. 0
+C. Error: in free(ptr);
+D. No error
+E. Memory Leakage
+Answer: B
+
+*/
+
+//******************************************************************
+
+/*
+    #include<stdio.h>
+    #include<string.h>
+    int main()
+    {
+    #define sunbeam "Karad SunBeam\n"
+    #define SUNBEAM "Pune SunBeam\n"
+    #define Sunbeam strlen(SUNBEAM) - 2 * 2 * 2
+    #ifdef SUNBEAM
+    printf(SUNBEAM);
+    #endif
+    #ifdef SUNBEAM
+    printf(Sunbeam+SUNBEAM);
+    #endif
+    return 0;
+    }
+
+//for preprocessor directive question you can create a .i file 
+  and check the expanded source code 
+// to create .i file command is gcc Day7_1.c -E -o Day7_1.i
+// give your program name 
+
+//refer the below soln     
+int main()
+{
+
+    printf("Pune SunBeam\n");
+
+    printf(strlen("Pune SunBeam\n") - 2 * 2 * 2 + "Pune SunBeam\n");
+                       13             - 2 * 2 * 2
+                       13             -   8
+                       5
+                   5  + "Pune Sunbeam"
+                     prints Sunbeam
+
+    O/P is  Pune SunBeam
+            Sunbeam
+    return 0;
+}
+
+    A. Pune SunBeam
+    SunBeam
+    B. Pune SunBeam
+    Pune SunBeam
+    C. SunBeam
+    SunBeam
+    D. Karad SunBeam
+    SunBeam
+    E. Pune Sunbeam
+    Sunbeam
+    Answer: A
+*/
+
+//******************************************************
+
+/*  
+What is the output of the following code:
+#include<stdio.h>
+#define exp(a) a+a * 5 / a*a
+int main( void )
+{
+int x = exp(3+2) * 5;
+printf("Value of X=%d",x);
+return 0;
+}
+
+//expandes as 
+int main( void )
+{
+int x = 3+2 +3+2 * 5 / 3+2*3+2 * 5;
+printf("Value of X=%d",x); // 27 
+return 0;
+}
+
+
+
+A. Value of X=27
+B. Value of X=32
+C. Value of X=20
+D. compile time error
+E. Value of X=28
+Answer: A
+
+*/ 
+
+//*************************************************************
+
+/* 
+#include<stdio.h>
+#define float double
+int main( void )
+{
+float pi=3.142f;
+float *i = &pi, j=56.22f;
+double *I= (double*)&pi, J=56.22;
+printf("sizeof(i)=%d sizeof(j)=%d",sizeof(i),sizeof(j));
+return 0;
+}
+expanded as 
+
+int main( void )
+{
+double pi=3.142f;
+double *i = &pi, j=56.22f;
+double *I= (double*)&pi, J=56.22;
+printf("sizeof(i)=%d sizeof(j)=%d",sizeof(i),sizeof(j));
+                                      4     ,   8(considered as double )  
+return 0;
+}
+
+A. sizeof(i)=8 sizeof(j)=8
+B. sizeof(i)=4 sizeof(j)=8
+C. sizeof(i)=2 sizeof(j)=8
+D. sizeof(i)=4 sizeof(j)=4
+E. Error
+Answer: B
+
+*/ 

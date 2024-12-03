@@ -1,0 +1,28 @@
+*****************************************************************************************
+#include<stdio.h>
+#include<string.h>
+int main( void )
+{
+char str[] = "Sunbeam Karad", rev[50];
+int i = strlen(str), j=0;
+
+for( i-- ; i>=0; rev[j++] = str[i--]); 
+rev[j] = '\0';
+puts(rev);
+return 0;
+}
+/*
+char str[] = "Sunbeam Karad", rev[50];
+int i = strlen(str), j=0;
+// i = 13 
+for(i-- ; i>=0; rev[j++] = str[i--]); // i is 12 now 
+//        12>=0 rev[0++] = str[12--]; // d is copied into   rev[0]=>    d 
+//        11>=0 rev[1++] = str[11--]; // a  is copied into  rev[1]=>    a
+//        10>=0 rev[2++] = str[10--]; // r  is copied into  rev[2]=>    r
+//        9>=0  rev[3++] = str[9--]; //  a  is copied into  rev[3]=>   a
+//        8>=0  rev[4++] = str[8--]; //  a  is copied into  rev[4]=>   K
+
+rev[j] = '\0';
+puts(rev);
+*/
+****************************************************************************************************

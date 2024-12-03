@@ -1,0 +1,211 @@
+/*
+    REFER THE DAIGRAM I HAVE SHARED 
+    IN DAIGRAM VALUES ARE DIFFERENT 
+    SOLVE IT ACCORDINGLY 
+
+
+#include<stdio.h>
+struct emp
+{
+int age;
+struct emp *ptr;
+};
+int main(void)
+{
+struct emp var={40,NULL};
+struct emp *ptr = &var;
+ptr->ptr = ptr;
+printf("%d %d %d",ptr->ptr->age,(*ptr).ptr->age, var.ptr->age);
+return 0;
+}
+A. 40 40 40
+B. 40 NULL 40
+C. 0 0 0
+D. Garbage Garbage Garbage
+E. Error
+Answer: A
+
+*/ 
+
+//********************************************************
+
+/*  
+typedef struct date
+{
+short int dd;
+short int mm;
+short int yy;
+typedef struct time // there is a compile time error 
+//dont use typedef inside the nested structure 
+{
+short int hr;
+short int min;
+short int sec;
+}TIME;
+}DATE;
+int main( void )
+{
+DATE d1 = {16,8,2023,9,0,0};
+const struct date d2=d1;
+printf("date %d-%d-%d @ %d:%d:%d am\n",d2.dd,d2.mm, d2.yy,
+ d2.TIME.hr, d2.TIME.min, d2.TIME.sec );
+return 0;
+}
+
+Instead use following  code 
+typedef struct time
+{
+    short int hr;
+    short int min;
+    short int sec;
+} TIME;
+typedef struct date
+{
+    short int dd;
+    short int mm;
+    short int yy;
+    TIME t;
+} DATE;
+
+
+// A. date 16-8-2023 @ 9:0:0 am
+// B. date 16-8-2023 @ 9:0:0 pm
+// C. Compile time error
+// D. Run time error
+// E. date garbage values @ garbage values
+// Answer: C
+
+*/ 
+// **************************************************************
+
+/*  
+// Below question is on bitfied concept 
+
+#include<stdio.h>
+struct demo
+{
+signed d1:2; // allocate 2 bits 
+unsigned d2:3; //allocate 3 bits 
+signed d3:4;//allocate 4 bits 
+};
+int main(void)
+{
+struct demo ds;
+ds.d1 = 1;ds.d2 = 3; ds.d3=9;
+printf("%d %d %d", ds.d1,ds.d2,ds.d3);
+ds.d1 = 2;ds.d2 = 7;ds.d3=10;
+printf(" %d %d %d", ds.d1,ds.d2,ds.d3);
+return 0;
+}
+
+// Below is the solution 
+struct demo
+{
+    signed d1 : 2;   // 2 bits
+    unsigned d2 : 3; // 3 bits
+    signed d3 : 4;   // 4 bits
+};
+
+        d1 => 2 bits
+        (2 to the power 2 - 1) - 1
+        (2 to the power 1) - 1
+         2 - 1
+         1
+         max range =>1
+         min range =>-2
+
+         d2 => 3 bits  ( unsigned )
+         (2 to the power 3) - 1
+          8 - 1
+          7 => max range
+          0 => min range
+
+        d3 => 4 bits
+        (2 to the power 4 - 1 ) - 1
+        (2 to the power 3 ) - 1
+               7 => max range
+               -8 => min range
+
+int main(void)
+{
+    struct demo ds;
+    // ds.d1 = 1; // prints 1
+    // ds.d2 = 3; // prints 3
+    // ds.d3 = 9;//  prints -7 ( cycle concept )
+    // //printf("%d %d %d", ds.d1, ds.d2, ds.d3);
+    //  ds.d1 = 2; // prints -2 ( cycle concept )
+    //  ds.d2 = 7; // OK prints 7
+    //  ds.d3 = 10; // prints -6 ( cycle concept )
+    //  printf(" %d %d %d", ds.d1, ds.d2, ds.d3);
+
+    return 0;
+}
+
+
+
+// A. 1 3 9 2 7 10
+// B. 1 3 -7 -2 7 -6
+// C. Error
+// D. 1 3 2 -2 7 3
+// E. 1 3 2 2 7 3
+// Answer: B
+
+*/ 
+
+//****************************************************************
+/* 
+// bitifield 
+#pragma pack(1)
+#include<stdio.h>
+typedef struct demo
+{
+unsigned bit1:1;  //1 bits
+signed bit2:2;  // 2 bits 
+signed bit3:3; // 3 bits 
+unsigned bit4:2;// 2 bits 
+}DEMO;
+// 1 + 2 + 3 + 2 => 8 bits allocated from 32 bits => 4 bytes 
+// size comes out to be 4 bytes 
+int main(void)
+{
+DEMO d1;
+struct demo d2;
+printf("\n %d %d",sizeof(d1),sizeof(d2));
+return 0;
+}
+
+*/
+
+//********************************************************* 
+
+/* 
+#include<stdio.h>
+struct Demo
+{
+int num1:4; // 4 bits 
+unsigned int num2:3;// 3 bits 
+int num3:2;// 2 bits 
+};
+// calculate the range and solve it accordingly 
+int main(void)
+{
+struct Demo d1;
+d1.num1=5;
+d1.num2=6;
+d1.num3=-1;
+printf("%d %d %d",d1.num1,d1.num2,d1.num3);
+printf(" ");
+d1.num1=10;
+d1.num2=9;
+d1.num3=3;
+printf("%d %d %d",d1.num1,d1.num2,d1.num3);
+return 0;
+}
+// A. 5 6 -1 -6 1 -1
+// B. 5 6 0 -6 1 0
+// C. 5 6 -1 -6 0 0
+// D. 5 6 -1 -6 -6 -1
+// E. 5 6 -1 -5 1 -1
+// Answer: A
+
+*/ 

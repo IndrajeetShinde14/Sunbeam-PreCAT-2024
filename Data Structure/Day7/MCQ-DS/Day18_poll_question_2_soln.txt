@@ -1,0 +1,30 @@
+#include<stdio.h>
+#pragma pack(1)
+typedef union result
+{
+float per;
+char grade[4];
+}RESULT;
+
+typedef struct student
+{
+int rollno; // 4 bytes 
+short int std; //2 bytes 
+char name[12]; // 12 bytes 
+char div;  //1 bytes 
+RESULT res; // 4 bytes 
+}STUDENT;
+// 4 + 2 + 12 + 1 + 4 => 23 bytes 
+
+typedef struct node
+{
+struct test *prev; // 8 bytes 
+STUDENT data; // 23 bytes 
+struct test *next; //8 bytes 
+}node_t;
+// 8 + 23 + 8 => 39 bytes 
+int main(void)
+{
+printf("\n size of node=%d", sizeof(node_t)); // 39 bytes 
+return 0;
+}

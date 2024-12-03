@@ -1,0 +1,151 @@
+
+		// Before solving the question of union see the following video 
+		   refer this video:
+		   https://www.youtube.com/watch?v=_-R1_SqZmXM	
+
+  #include <stdio.h>
+// typedef union testUnion
+// {
+// short int num;
+// unsigned char ch[2];
+// }TESTUNION;
+// typedef union testUnion TESTUNION;
+// int main()
+// {
+// TESTUNION ut;
+// ut.num=639;
+// printf("ut.ch[0]=%d\n", ut.ch[0]+1); //128
+// printf("ut.ch[1]=%d\n", ut.ch[1]-1);
+// return 0;
+// }
+/*
+        Binary of 639
+
+      00000010 01111111
+         [1]     [0]
+
+      read ch[0] i.e 8 bits from right side
+      ut.ch[0] =>  127
+      ut.ch[0] + 1 => 127 + 1 => 128
+
+      ut.ch[1] => 1
+      ut.ch[1]-1 => 2 - 1 => 1
+
+//****************************************************************
+
+/* 
+SKIP THIS QUESTION dont solve 
+
+#include <stdio.h>
+int main(void)
+{
+FILE *fp = stdout;
+int num=102;
+fprintf(fp, "%d-%c-%d-%c",num,num-32,num+=32,num-=32);
+return 0;
+}
+ A. 102-F-102-f
+B. 102-f-70-F
+C. 70-f-102-F
+D. 70-F-70-f
+Answer: A
+
+*/ 
+
+//*********************************
+
+*/
+// #include<stdio.h>
+// int main(void)
+// {
+// union result
+// {
+// short int percentage;
+// char grade[2];
+// };// 2 bytes
+// typedef union result RESULTUNION;
+// RESULTUNION r1={65.5f+5};
+// printf("%d\t",r1.grade[1]-r1.grade[0] );
+// printf("%c\n",r1.grade[0]+ ' ');
+
+// return 0;
+// /*
+//     70 binary number
+
+//     Grade
+//     00000000 01000110
+//       [1]      [0]
+
+//     r1.grade[1]-r1.grade[0] => 0 - 70 => -70
+
+//     r1.grade[0]+ ' ' => 70 + 32 => 102 => %c => f
+
+// */
+// }
+
+******************************************************************
+
+#include <stdio.h>
+
+// #pragma pack(1)
+// struct
+// {
+//     char ca[10]; //10 bytes 
+//     union u
+//     {
+//         int i;
+//         char c;
+//         long l;
+//         double d;
+//     } u1[10]; // 10 * 8 => 80 bytes (each array index will share 8 bytes)
+
+// } s1[10];
+// int main(void)
+// {
+       
+//      //printf("%d ",sizeof(s1->u1)); //size of union is 80 bytes  
+//      //printf("%d ", sizeof(s1[0].u1)); // 10 * 8 => 80 bytes 
+//      //printf("%d ", sizeof(s1[0])); // 80 + 10 => 90 bytes (specific index )
+//      //printf("%d ", sizeof(s1)); // 90 * 10 => 900 bytes (total size ) 
+//      //printf("%d ", sizeof(s1) + sizeof(s1[0].u1)); // 900 + 80 => 980 bytes 
+    
+//     return 0;
+// }
+
+// ***************************************************************************************************************
+/* 
+
+//if sunbeam.txt file contents [0123456789] data in file
+//what will be output ?
+
+#include <stdio.h>
+int main(void)
+{
+FILE *fpRead=NULL;
+char ch;
+int sum=0;
+fpRead = fopen("sunbeam.txt", "r"); // open the file in read mode 
+while((ch=fgetc(fpRead))!= EOF) 
+sum+= ch;
+
+/*
+        file contains 
+        0123456789
+
+        while((ch=fgetc(fpRead))!= EOF) 
+                sum+= ch;
+        This loop will read the file character by character till EOF         
+            first character will be read '0' ( now note 0 will read as character as fgetc function is used) 
+            sum = sum + ch => 0 + '0' => 0 + 48 => 48  
+            //adding ascii value of '0' in sum
+     
+     // it will read whole file and add the each ascii value inside the sum 
+     // till the end of the file 
+*/
+
+//printf("\n%d", sum); // finally it will print sum 
+// final sum will 525 
+// i.e if we add ascii values from '0' to '9' it sums up to 525 
+//return 0;
+
+//}

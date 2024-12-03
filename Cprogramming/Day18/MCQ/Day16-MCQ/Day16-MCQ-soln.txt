@@ -1,0 +1,172 @@
+
+/*
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+struct course
+{
+    char *name;
+};
+struct course fun(void)
+{
+    static struct course *s = NULL;
+    s->name = "DITISS";
+    /*
+            //  In the fun function, you have a static pointer s, but it's not pointing to any allocated memory for a struct course.
+            //  When you try to access s->name,
+            //  you are dereferencing the uninitialized pointer
+            //  runtime error
+    */
+//   return *s;
+//}
+
+// soln is below
+
+/*
+struct course *fun(void)
+{
+    struct course *s = (struct course *)malloc(sizeof(struct course));
+
+    if (s != NULL)
+    {
+        s->name = (char *)malloc(strlen("DITISS") + 1); // +1 for the null terminator
+        if (s->name != NULL)
+        {
+            strcpy(s->name, "DITISS");
+        }
+    }
+    return s;
+}
+*/
+/*
+int main(void)
+{
+    struct course *c1 = fun();
+    printf("%s", c1->name);
+
+    // Don't forget to free the allocated memory
+    free(c1->name);
+    free(c1);
+
+    return 0;
+}
+A. DITISS
+B. Error ( run-time error )
+C. DITISSDITISS
+D. Print memory address of DITISS
+E. Garbage Value
+Answer: B
+*/
+
+//****************************************************************
+
+/*
+
+#include <stdio.h>
+#include <string.h>
+int main(void)
+{
+    struct Cell
+    {
+        int isParent;
+        char *child;
+    };
+    struct Cell c1 = {23, "Remote"};
+    struct Cell c2 = c1;
+    c2.isParent = 24;
+    //strcpy(c2.child, "center"); // NOT OK ( trying to modify from RO data section )
+    //runtime error
+
+    printf("\n %d %s", c2.isParent, c2.child);
+    return 0;
+}
+// A. 24 Remote
+// B. 24 center
+// C. 24 Remotecenter
+// D. runtime error
+// E. 23 center
+// Answer: D
+
+//instead use following approach
+#include <stdio.h>
+#include <string.h>
+#include <stdlib.h>
+
+int main(void)
+{
+    struct Cell
+    {
+        int isParent;
+        char *child;
+    };
+
+    struct Cell c1 = {23, "Remote"};
+    struct Cell c2 = c1;
+    c2.isParent = 24;
+
+    // Allocate memory for c2.child and copy the string
+    c2.child = (char *)malloc(strlen("center") + 1); // +1 for the null terminator
+    strcpy(c2.child, "center");
+    printf("\n %d %s", c2.isParent, c2.child);
+    //free the allocated memory
+    free(c2.child);
+
+    return 0;
+}
+
+*/
+// ****************************************************************
+
+/* 
+#include <stdio.h>
+struct value
+{
+    static unsigned int a; // NOT OK ( error )
+    int b = 5;
+};
+int main(void)
+{
+    struct value v;
+    v.a = 5;
+    v.b = 1;
+    printf("%d %d\n", v.a, v.b);
+    return 0;
+}
+
+A. 5 1
+B. 2 5
+C. 5 5
+D. compile time error
+E. 0 1
+Answer : D
+
+*/ 
+
+/* 
+
+  REFER THE DAIGRAM AND SOLVE IT   
+
+#include<stdio.h>
+typedef struct p *q;
+struct p
+{
+int x;
+char y;
+q ptr;
+};
+int main(void)
+{
+struct p p = {1, 65, &p};
+printf("p.ptr->x =%d \t p.ptr->y =%c",p.ptr->x,p.ptr->y);
+return 0;
+}
+
+// A. Compile time error
+// B. p.ptr->x = 1 p.ptr->y = A
+// C. p.ptr->x = 1 p.ptr->y = 65
+// D. p.ptr->x = Address of p p. ptr->y = Address of p
+// E. p.ptr->x = 65 p.ptr->y = A
+// Answer: B
+
+*/ 

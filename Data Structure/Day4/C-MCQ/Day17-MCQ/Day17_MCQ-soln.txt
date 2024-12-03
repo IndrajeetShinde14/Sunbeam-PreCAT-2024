@@ -1,0 +1,211 @@
+/*
+
+/*
+        THIS question i have shared daigram and soln as well
+
+        PLEASE NOTE THE SOLUTION I HAVE SHARED IN THAT SOLUTION
+        QUESTION IS SAME BUT VALUES ARE DIFFERENT PLEASE CHECK UNDERSTAND
+        AND SOLVE
+
+        BELOW PART IS DIFFERENT so solve it accordingly
+        st[] = {240, "DAC Pune",
+          60, " DITISS ",
+          120, " KDAC Karad",
+          60, " DBDA",
+          60, "DESD",
+          120, "DMC"};
+
+
+    BELOW PART is same
+    struct test *p = st;
+    p += 1;
+    ++p->course;
+    printf(" %s,", p++->course);
+    printf(" %c,", *++p->course);
+    printf(" %d,", p[0].capacity);
+    printf(" %s \n", p->course);
+
+    This above part is same so behaviour will be same
+    
+    REFER THE DAIGRAM AND TEXT DOCUMENT ( i have shared )
+*/
+/*
+#include <stdio.h>
+struct test
+{
+    int capacity;
+    char *course;
+} st[] = {240, "DAC Pune",
+          60, " DITISS ",
+          120, " KDAC Karad",
+          60, " DBDA",
+          60, "DESD",
+          120, "DMC"};
+int main(void)
+{
+    struct test *p = st;
+    p += 1;
+    ++p->course;
+    printf(" %s,", p++->course);
+    printf(" %c,", *++p->course);
+    printf(" %d,", p[0].capacity);
+    printf(" %s \n", p->course);
+    return 0;
+}
+
+A.KDAC Karad, D, 60, DBDA
+B.DITISS, K, 120, KDAC Karad
+C.DAC Pune, K, 120, DAC
+D.KDAC, K, 120, DAC KARAD
+E.Error
+Answer : B
+
+*/
+
+//**************************************************************
+
+/*
+#include <stdio.h>
+#define MAX 6
+#define CAPACITY MAX * 10
+struct course
+{
+    int capacity;
+    char coursename[15];
+};
+int main(void)
+{
+    struct course arr[] = {{CAPACITY * 4, "DAC Pune"},
+                           {CAPACITY * 2, "KDAC Karad"},
+                           {CAPACITY, "DBDA"},
+                           {CAPACITY, "DESD"},
+                           {CAPACITY * 2, "DMC"},
+                           {CAPACITY, "DITISS"}};
+    printf("%d, %d , %d", arr[-1 + MAX].capacity,
+           ((MAX - 1 + arr))->capacity,
+           (*(arr - 1 + MAX)).capacity);
+    return 0;
+}
+struct course
+{
+    int capacity;
+    char coursename[15];
+};
+/*
+int main(void)
+{
+    struct course arr[] = {{6 * 10 * 4, "DAC Pune"}, //240 , "DAC Pune"
+                           {6 * 10 * 2, "KDAC Karad"},//120 , "KDAC Karad"
+                           {6 * 10, "DBDA"},//60 , "DBDA"
+                           {6 * 10, "DESD"},//60 , "DESD"
+                           {6 * 10 * 2, "DMC"},//120 , "DMC"
+                           {6 * 10, "DITISS"}};//60 , "DITISS"
+    // printf("%d, %d , %d", arr[-1 + 6].capacity,
+    //        ((6 - 1 + arr))->capacity,
+    //        (*(arr - 1 + 6)).capacity);
+
+    printf("%d, %d , %d", arr[5].capacity,
+           ((5 + arr))->capacity,
+           (*(arr + 5 )).capacity);
+
+     /*
+        arr[5].capacity =>  {6 * 10, "DITISS"}
+        capacity => 60
+        ((5 + arr))->capacity  => {6 * 10, "DITISS"}
+        capacity => 60
+        (*(arr - 1 + 6)).capacity =>  {6 * 10, "DITISS"}
+        capacity => 60
+     */
+//    return 0;
+//}
+
+//***********************************************************************
+
+/*
+        REFER THE DAIGRAM I HAVE SHARED 
+        DAIGRAM IS OF SAME QUESTION ONLY THE VALUES ARE 
+        DIFFERENT SOLVE IT ACCORDINGLY 
+
+
+What will be the output of the following :
+#include <stdio.h>
+    int
+    main(void)
+{
+    struct s
+    {
+        char *p;
+        int i;
+        struct s *sp;
+    } a[] = {"DITISS", 1, a + 1,
+             "DBDA", 2, a + 2,
+             "DESD", 3, a},
+      *p = NULL;
+    p = a;
+    printf("%s %s %s\n", a[0].p, p->p, a[2].sp->p);
+    return 0;
+}
+A.DITISS DITISS DBDA
+B.DITISS DBDA DESD
+C.DITISS DITISS DBDA
+D.DITISS DITISS DITISS
+E.Error
+Answer : D
+
+*/ 
+
+
+/*                                       
+
+//What will be the output of the following:
+#include <stdio.h>
+struct emp
+{
+int empno;
+char name[10];
+float sal;
+char desg:8;
+}; 
+int main( void )
+{
+static struct emp e1;
+printf("Address of e1.desg is %u", &e1.desg); //compile time error 
+printf("Address of e1.sal is %u", &e1.sal); //compile time error 
+// we cannot find address of bitfield 
+return 0;
+}
+A. prints the same address of e1.desg and e1.sal
+B. prints the different addresses of e1.desg and e1.sal
+C. Compile time error
+D. Run time error
+E. prints the address 0 as structure variable is static
+Answer: C     
+
+*/
+
+//****************************************************************
+// REFER THE DAIGRAM  I HAVE SHARED and solve 
+
+/*
+What will be the output of the following:
+#include <stdio.h>
+int main(void)
+{
+struct test1
+{
+char name[15]; 
+char *ptr;
+};
+struct test2
+{
+char *c ; 
+struct test1 t1 ;
+};
+struct test2 t2 = {"Pune","Hinjawadi","Karad"};
+printf("%s%s\n",t2.c,t2.t1.ptr);
+printf("%s%s\n",++t2.c,++t2.t1.ptr);
+return 0;
+}
+
+
+*/
